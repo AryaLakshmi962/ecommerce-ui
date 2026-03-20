@@ -15,10 +15,12 @@ export default function App() {
   const [tab, setTab] = useState("shop");
 
   return (
-    <div>
+    <div style={{ fontFamily: "sans-serif", background: "#0a0a0f", minHeight: "100vh" }}>
+      
+      {/* 🔹 Navbar */}
       <nav style={{
         display: "flex",
-        gap: 8,
+        gap: 10,
         padding: "12px 32px",
         background: "#0e0e12",
         borderBottom: "1px solid #1e1e2c",
@@ -35,12 +37,17 @@ export default function App() {
               borderRadius: 10,
               border: "none",
               cursor: "pointer",
-              fontFamily: "sans-serif",
               fontWeight: 600,
               fontSize: 13,
-              transition: "0.18s",
+              transition: "0.2s",
               background: tab === t.id ? "#7c6af7" : "transparent",
-              color:      tab === t.id ? "#fff"    : "#666",
+              color: tab === t.id ? "#fff" : "#aaa",
+            }}
+            onMouseEnter={(e) => {
+              if (tab !== t.id) e.target.style.background = "#1e1e2c";
+            }}
+            onMouseLeave={(e) => {
+              if (tab !== t.id) e.target.style.background = "transparent";
             }}
           >
             {t.label}
@@ -48,10 +55,33 @@ export default function App() {
         ))}
       </nav>
 
-      {tab === "shop"      && <ShopPage />}
-      {tab === "cart"      && <CartPage onGoCheckout={() => setTab("checkout")} />}
-      {tab === "checkout"  && <CheckoutPage />}
-      {tab === "inventory" && <InventoryPage />}
+      {/* 🔹 Header */}
+      <h1 style={{
+        textAlign: "center",
+        margin: "20px 0",
+        color: "#7c6af7"
+      }}>
+        🛒 My E-Commerce App
+      </h1>
+
+      {/* 🔹 Pages */}
+      <div style={{ padding: "0 20px" }}>
+        {tab === "shop"      && <ShopPage />}
+        {tab === "cart"      && <CartPage onGoCheckout={() => setTab("checkout")} />}
+        {tab === "checkout"  && <CheckoutPage />}
+        {tab === "inventory" && <InventoryPage />}
+      </div>
+
+      {/* 🔹 Footer */}
+      <footer style={{
+        textAlign: "center",
+        padding: 20,
+        color: "#666",
+        fontSize: 12,
+        marginTop: 30
+      }}>
+        © 2026 My E-Commerce App
+      </footer>
     </div>
   );
 }
